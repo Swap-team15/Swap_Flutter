@@ -3,6 +3,8 @@
         android:label="swap"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="AIzaSyBtqCb0vx8OZ2Kc2lk4W2QH15pEwEsxmFg"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

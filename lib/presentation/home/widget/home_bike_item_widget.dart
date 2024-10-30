@@ -5,16 +5,18 @@ import 'package:swap/core/constants/swap_style.dart';
 
 class HomeBikeItemWidget extends StatelessWidget {
   final bool? hasOutline;
+  final Function? event;
 
   const HomeBikeItemWidget({
     super.key,
     this.hasOutline = true,
+    this.event,
   });
 
   @override
   Widget build(BuildContext context) {
     return SwapGesture(
-      event: () => context.push("/purchaseSelectOption"),
+      event: () => event == null ? context.push("/purchaseSelectOption") : event!(),
       child: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(

@@ -22,10 +22,7 @@ class _RootScreenState extends ConsumerState<RootScreen>
   void initState() {
     super.initState();
     _controller = TabController(
-      length: RootType.values.length,
-      vsync: this,
-      initialIndex: 1
-    );
+        length: RootType.values.length, vsync: this, initialIndex: 1);
   }
 
   @override
@@ -54,9 +51,7 @@ class _RootScreenState extends ConsumerState<RootScreen>
                     (e) => SwapGesture(
                       event: () {
                         _controller.animateTo(e.value.index);
-                        ref
-                            .read(navigatorControllerProvider.notifier)
-                            .changeType(index: _controller.index);
+                        ref.read(navigatorControllerProvider.notifier).changeType(index: _controller.index);
                       },
                       child: RootNavigationItem(type: e.value),
                     ),
@@ -69,7 +64,8 @@ class _RootScreenState extends ConsumerState<RootScreen>
       child: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _controller,
-        children: RootType.values.asMap().entries.map((e) => e.value.page).toList(),
+        children:
+            RootType.values.asMap().entries.map((e) => e.value.page).toList(),
       ),
     );
   }
