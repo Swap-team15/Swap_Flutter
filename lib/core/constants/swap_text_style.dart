@@ -130,4 +130,18 @@ class SwapTextStyle {
       overflow: overflow,
     );
   }
+
+  static TextStyle span({
+    required Color color,
+    TextOverflow overflow = TextOverflow.visible,
+  }) {
+    return TextStyle(
+      color: color,
+      fontSize: 16,
+      fontWeight: FontWeight.w700,
+      fontFamily: pretendard,
+      height: 1.625,
+      overflow: overflow,
+    );
+  }
 }

@@ -13,9 +13,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  riverpod: ^2.6.1
   dio: ^5.7.0
   go_router: ^14.3.0
+  flutter_svg: ^2.0.10+1
+  flutter_riverpod: ^2.6.1
+  google_maps_flutter: ^2.9.0
 
 dev_dependencies:
   flutter_test:
@@ -26,9 +28,18 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/icon/core/
+    - assets/icon/root/
+    - assets/image/core/
+    - assets/image/home/
+    - assets/image/purchase/
+
   fonts:
     - family: Pretendard
       fonts:
+        - asset: assets/font/pretendard_bold.otf
+          weight: 700
         - asset: assets/font/pretendard_semibold.otf
           weight: 600
         - asset: assets/font/pretendard_regular.otf
