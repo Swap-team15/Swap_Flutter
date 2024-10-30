@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swap/core/constants/swap_style.dart';
+import 'package:swap/presentation/provider/bike_list_provider.dart';
 
-class HomePurchaseItemWidget extends StatelessWidget {
-  const HomePurchaseItemWidget({super.key});
+class HomePurchaseItemWidget extends ConsumerWidget {
+  final int index;
+
+  const HomePurchaseItemWidget({
+    super.key,
+    required this.index,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bike = ref.watch(bikeListProvider).elementAt(index);
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
@@ -17,7 +25,7 @@ class HomePurchaseItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "アーバンバイク\nACE(Midnight black)",
+              "${bike.bikeType}\n${bike.bikeName}",
               textAlign: TextAlign.center,
               style: SwapTextStyle.bodySmall(
                 color: SwapColor.black,
@@ -26,7 +34,7 @@ class HomePurchaseItemWidget extends StatelessWidget {
             const SizedBox(height: 4),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 13.5),
-              child: Image.asset("$imageCoreAsset/bike_image.png"),
+              child: Image.asset("$imageCoreAsset/${bike.bikeId}.png"),
             ),
             const SizedBox(height: 24),
             Row(
@@ -39,7 +47,7 @@ class HomePurchaseItemWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "1500円",
+                  "${bike.price}円",
                   style: SwapTextStyle.subTitle(
                     color: SwapColor.black,
                   ),

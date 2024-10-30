@@ -12,7 +12,12 @@ import 'package:swap/presentation/home/widget/home_bike_item_widget.dart';
 import 'package:swap/presentation/home/widget/subscribe_plan/home_subscribe_plan_widget.dart';
 
 class HomePurchaseSelectPlanScreen extends StatelessWidget {
-  const HomePurchaseSelectPlanScreen({super.key});
+  final int index;
+
+  const HomePurchaseSelectPlanScreen({
+    super.key,
+    required this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +38,7 @@ class HomePurchaseSelectPlanScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SwapGesture(
-        event: () => context.push("/purchase"),
+        event: () => context.push("/purchase", extra: index),
         child: Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: Padding(
@@ -59,7 +64,10 @@ class HomePurchaseSelectPlanScreen extends StatelessWidget {
         children: [
           SwapDivider(),
           SwapContentTitleWidget(text: "僕のバイクです"),
-          HomeBikeItemWidget(hasOutline: false),
+          HomeBikeItemWidget(
+            hasOutline: false,
+            index: 0,
+          ),
           SwapDivider(),
           HomeSubscribePlanWidget(),
         ],

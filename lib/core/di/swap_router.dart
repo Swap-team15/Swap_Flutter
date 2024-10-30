@@ -6,11 +6,19 @@ import 'package:swap/presentation/home/view/purchase/home_purchase_select_option
 import 'package:swap/presentation/home/view/purchase/home_purchase_select_plan_screen.dart';
 import 'package:swap/presentation/map/view/map_place_detail_screen.dart';
 import 'package:swap/presentation/map/view/map_place_purchase_screen.dart';
+import 'package:swap/presentation/my/view/my_user_bike_screen.dart';
+import 'package:swap/presentation/my/view/my_user_info_screen.dart';
 import 'package:swap/presentation/root/view/root_screen.dart';
+import 'package:swap/presentation/splash.dart';
 
 final swapRouter = GoRouter(
-  initialLocation: "/root",
+  initialLocation: "/",
   routes: [
+    GoRoute(
+        path: "/",
+        builder: (context, state) {
+          return const Splash();
+        }),
     GoRoute(
         path: "/root",
         builder: (context, state) {
@@ -25,19 +33,19 @@ final swapRouter = GoRouter(
     GoRoute(
       path: "/purchaseSelectOption",
       builder: (context, state) {
-        return const HomePurchaseSelectOptionScreen();
+        return HomePurchaseSelectOptionScreen(index: state.extra as int);
       },
     ),
     GoRoute(
       path: "/purchaseSelectPlan",
       builder: (context, state) {
-        return const HomePurchaseSelectPlanScreen();
+        return HomePurchaseSelectPlanScreen(index: state.extra as int);
       },
     ),
     GoRoute(
       path: "/purchase",
       builder: (context, state) {
-        return const HomePurchaseScreen();
+        return HomePurchaseScreen(index: state.extra as int);
       },
     ),
     GoRoute(
@@ -47,19 +55,32 @@ final swapRouter = GoRouter(
         final title = extra?["title"] as String; // title 가져오기
         final image = extra?["image"] as String; // image 가져오기
 
-        return MapPlaceDetailScreen(image: image, title: title); // MapPlaceDetailScreen에 전달
+        return MapPlaceDetailScreen(
+            image: image, title: title); // MapPlaceDetailScreen에 전달
       },
     ),
     GoRoute(
       path: "/placePurchase",
       builder: (context, state) {
-        return const MapPlacePurchaseScreen();
+        return MapPlacePurchaseScreen(index: state.extra as int);
       },
     ),
     GoRoute(
       path: "/loading",
       builder: (context, state) {
         return const LoadingIndicatorLayout();
+      },
+    ),
+    GoRoute(
+      path: "/user",
+      builder: (context, state) {
+        return const MyUserInfoScreen();
+      },
+    ),
+    GoRoute(
+      path: "/userBike",
+      builder: (context, state) {
+        return const MyUserBikeScreen();
       },
     ),
   ],

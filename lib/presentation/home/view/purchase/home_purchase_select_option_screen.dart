@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:swap/core/component/swap_app_bar.dart';
@@ -11,10 +12,23 @@ import 'package:swap/core/layout/swap_layout.dart';
 import 'package:swap/core/state/purchase_option.dart';
 import 'package:swap/presentation/home/widget/purchase/home_purchase_item_widget.dart';
 import 'package:swap/presentation/home/widget/purchase/home_purchase_option_list_widget.dart';
+import 'package:swap/presentation/provider/bike_detail_provider.dart';
 
-class HomePurchaseSelectOptionScreen extends StatelessWidget {
-  const HomePurchaseSelectOptionScreen({super.key});
+class HomePurchaseSelectOptionScreen extends ConsumerStatefulWidget {
+  final int index;
 
+  const HomePurchaseSelectOptionScreen({
+    super.key,
+    required this.index,
+  });
+
+  @override
+  ConsumerState<HomePurchaseSelectOptionScreen> createState() =>
+      _HomePurchaseSelectOptionScreenState();
+}
+
+class _HomePurchaseSelectOptionScreenState
+    extends ConsumerState<HomePurchaseSelectOptionScreen> {
   @override
   Widget build(BuildContext context) {
     return SwapLayout(
@@ -34,7 +48,7 @@ class HomePurchaseSelectOptionScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: SwapGesture(
-        event: () => context.push("/purchaseSelectPlan"),
+        event: () => context.push("/purchaseSelectPlan", extra: widget.index),
         child: Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: Padding(
@@ -61,7 +75,7 @@ class HomePurchaseSelectOptionScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const HomePurchaseItemWidget(),
+              HomePurchaseItemWidget(index: widget.index),
               const SwapDivider(),
               const SwapContentTitleWidget(text: "アクセサリーです"),
               const HomePurchaseOptionListWidget(),

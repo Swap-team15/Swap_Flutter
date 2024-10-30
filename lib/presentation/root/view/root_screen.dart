@@ -4,6 +4,7 @@ import 'package:swap/core/component/swap_gesture.dart';
 import 'package:swap/core/constants/swap_style.dart';
 import 'package:swap/core/layout/swap_layout.dart';
 import 'package:swap/core/state/root_type.dart';
+import 'package:swap/presentation/provider/bike_list_provider.dart';
 import 'package:swap/presentation/root/provider/navigator_controller_provider.dart';
 import 'package:swap/presentation/root/widget/root_navigation_item.dart';
 
@@ -37,8 +38,14 @@ class _RootScreenState extends ConsumerState<RootScreen>
       bottomNavigationBar: SafeArea(
         child: Container(
           height: 52,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: SwapColor.white,
+            border: Border(
+              top: BorderSide(
+                width: 1,
+                color: SwapColor.gray100,
+              ),
+            )
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 62),

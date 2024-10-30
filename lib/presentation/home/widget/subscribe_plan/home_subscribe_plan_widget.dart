@@ -27,6 +27,7 @@ class HomeSubscribePlanWidget extends StatelessWidget {
                   .entries
                   .map(
                     (e) => HomeSubscribePlanItemWidget(
+                      index: e.value.index,
                       cost: e.value.cost,
                       title: e.value.title,
                       caption: e.value.caption,

@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:swap/core/component/swap_gesture.dart';
 import 'package:swap/core/constants/swap_style.dart';
+import 'package:swap/presentation/provider/bike_list_provider.dart';
+import 'package:swap/presentation/provider/bike_option_provider.dart';
+import 'package:swap/presentation/provider/plan_provider.dart';
 
-class HomePurchaseBikeItemWidget extends StatelessWidget {
-  const HomePurchaseBikeItemWidget({super.key});
+class HomePurchaseBikeItemWidget extends ConsumerWidget {
+  final int index;
+
+  const HomePurchaseBikeItemWidget({
+    super.key,
+    required this.index,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final bikeList = ref.watch(bikeListProvider).elementAt(index);
+    final plan = ref.watch(planProvider);
+    final option = ref.watch(bikeOptionProvider);
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: const BoxDecoration(
@@ -24,7 +36,7 @@ class HomePurchaseBikeItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              "週末購読です",
+              plan!.title,
               style: SwapTextStyle.label(
                 color: SwapColor.blue,
               ),
@@ -33,22 +45,30 @@ class HomePurchaseBikeItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
-                  "$imageCoreAsset/bike_image.png",
+                  "$imageCoreAsset/${bikeList.bikeId}.png",
                   width: 75,
                   height: 52,
                 ),
                 Text(
-                  "アーバンバイク\nACE(Midnight black)",
+                  "${bikeList.bikeType}\n${bikeList.bikeName}",
                   textAlign: TextAlign.end,
                   style: SwapTextStyle.bodySmall(color: SwapColor.black),
                 ),
               ],
             ),
-            Text(
-              "+ 自転車ロックです",
-              style: SwapTextStyle.label(
-                color: SwapColor.black,
-              ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: option.length,
+              itemBuilder: (context, index) {
+                return Text(
+                  "+ ${option[index].name}",
+                  textAlign: TextAlign.end,
+                  style: SwapTextStyle.label(
+                    color: SwapColor.black,
+                  ),
+                );
+              },
             ),
           ],
         ),

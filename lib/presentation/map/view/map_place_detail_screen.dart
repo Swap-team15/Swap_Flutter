@@ -89,8 +89,9 @@ class MapPlaceDetailScreen extends StatelessWidget {
                 itemCount: 4,
                 itemBuilder: (context, index) {
                   return HomeBikeItemWidget(
+                    index: index,
                     hasOutline: index == 0 ? false : true,
-                    event: () => context.push("/placePurchase"),
+                    event: () => context.push("/placePurchase", extra: index),
                   );
                 },
               ),
